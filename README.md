@@ -22,11 +22,27 @@ To ensure continuous delivery and rapid iteration, Whisk and Drizzle is deployed
 
 This system automates email sending to users by leveraging **Amazon EventBridge**, **AWS Lambda**, and **Amazon Simple Email Service (SES)**. Here’s how it works:
 
-1. **Scheduling with Amazon EventBridge**  
-2. **AWS Lambda Execution**  
-3. **Email Delivery via Amazon SES**  
-4. **Monitoring and Logs**  
+This system automates email sending to users by leveraging **Amazon EventBridge**, **AWS Lambda**, and **Amazon Simple Email Service (SES)**. Here’s how it works:
 
+1. **Scheduling with Amazon EventBridge**  
+   - A rule is configured in EventBridge to trigger at specific intervals (e.g., daily, weekly).
+   - When the trigger fires, it invokes the AWS Lambda function.
+
+2. **AWS Lambda Execution**  
+   - The Lambda function contains the core logic for preparing and sending emails.
+   - It can read or store relevant data in **Amazon Simple Storage Service (S3)** if needed (e.g., retrieving templates or user data, or writing logs).
+
+3. **Email Delivery via Amazon SES**  
+   - Once the Lambda function gathers the necessary information, it uses Amazon SES to send out emails to the designated users.
+   - SES handles the email infrastructure, ensuring deliverability and tracking (bounce, complaints, etc.).
+
+4. **Monitoring and Logs**  
+   - You can view logs and execution metrics (e.g., function duration, invocations) from AWS CloudWatch to monitor performance and troubleshoot if needed.
+
+In the screenshot above:
+- **Left**: You can see the `EmailToUsers` schedule details configured in EventBridge.  
+- **Center**: A snippet of the Lambda function’s Node.js code.  
+- **Right**: A code editor view for the Lambda function, showing how the payload and logic are structured.
 This end-to-end setup ensures timely and automated email distribution to users with minimal manual intervention—both **scalable** and **cost-efficient**.
 
 ## YouTube
